@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-cm
+  namespace: ci-cd
+data:
+  index.html: |
+    <html>
+      <body>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h1 style="text-align:center;color:#1E90FF">Welcome to FeiYi's&copy; Blog</h1>
+      </body>
+    </html>
+  healthz.html: |
+    <html>
+      <body>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <h1 style="text-align:center;color:#1E90FF">Healthz Check</h1>
+      </body>
+    </html>
