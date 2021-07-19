@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: ci-cd
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      tolerations:
+      - key: "node-role.kubernetes.io/master"
+        effect: "NoSchedule"
+      containers:
+      - name: nginx
+        image: nginx:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /healthz
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html/index.html
+          readOnly: True
+          subPath: index.html
+        - name: html
+          mountPath: /usr/share/nginx/html/healthz/index.html
+          readOnly: True
+          subPath: healthz.html
+      volumes:
+      - name: html
+        configMap:
+          name: nginx-cm
