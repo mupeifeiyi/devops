@@ -18,7 +18,7 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: nginx
-        image: nginx:latest
+        image: 172.16.182.136:30003/nginx:1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
@@ -31,11 +31,11 @@ spec:
           periodSeconds: 5
         volumeMounts:
         - name: html
-          mountPath: /usr/share/nginx/html/index.html
+          mountPath: /usr/local/nginx/html/index.html
           readOnly: True
           subPath: index.html
         - name: html
-          mountPath: /usr/share/nginx/html/healthz/index.html
+          mountPath: /usr/local/nginx/html/healthz/index.html
           readOnly: True
           subPath: healthz.html
       volumes:
